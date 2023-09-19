@@ -18,4 +18,16 @@ export class ContatoService {
   save(contato: Contato) : Observable<Contato>{
     return this.http.post<Contato>(this.url, contato);
   }
+
+  list() : Observable<Contato[]> {
+    return this.http.get<any>(this.url);
+  }
+
+  favourite(contato: Contato) : Observable<any> {
+    return this.http.patch(`${this.url}/${contato.id}/favorito`, null);
+  }
+
+  upload(contato: Contato, formData: FormData) : Observable<any> {
+    return this.http.put(`${this.url}/${contato.id}/foto`, formData, {responseType : 'blob'});
+  }
 }
